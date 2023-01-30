@@ -31,6 +31,7 @@ const List = styled.div`
   display: flex;
   justify-content: center;
   margin: 2rem 0rem;
+  justify-content: space-evenly;
 `
 const SLink = styled(NavLink)`
   display: flex;
@@ -38,7 +39,6 @@ const SLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  margin-right: 1.8rem;
   text-align: none;
   background: linear-gradient(35deg, #494949, #313131);
   width: 5rem;
@@ -64,6 +64,19 @@ const SLink = styled(NavLink)`
 
     svg {
       color: #FFF;
+    }
+  }
+
+  @media (max-width: 767px) {
+    width: 4rem;
+    height: 4rem;
+
+    h4 {
+      font-size: 0.6rem;
+    }
+
+    svg {
+      font-size: 1.2rem;
     }
   }
 `

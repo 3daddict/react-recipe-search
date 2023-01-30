@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
-import Popular from '../components/Popular'
-import Veggie from '../components/Veggie'
+import { motion } from 'framer-motion';
+import Popular from '../components/Popular';
+import Veggie from '../components/Veggie';
+import Dessert from '../components/Dessert';
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
     >
       <Popular />
       <Veggie />
+      <Dessert />
     </motion.div>
   )
 }
