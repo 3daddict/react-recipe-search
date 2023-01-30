@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 
 function Recipe() {
   const [details, setDetails] = useState({});
-  const [activeTab, setActiveTab] = useState('instructions');
-
   let params = useParams();
 
   useEffect(() => {
@@ -18,72 +16,101 @@ function Recipe() {
     fetchDetails();
   },[params.id]);
 
-  return (
-    <DetailWrapper>
-      <div>
-        <h2>{details.title}</h2>
-        <img src={details.image} alt={details.title} />
-      </div>
-      <Info>
-        <Button className={activeTab === 'instructions' ? 'active' : ''} onClick={() => setActiveTab('instructions')}>
-          Instructions
-        </Button>
-        <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>
-          Ingredients
-        </Button>
-        {activeTab === 'instructions' && (
-          <div>
-            <p dangerouslySetInnerHTML={{__html: details.instructions}}></p>
-            <p dangerouslySetInnerHTML={{__html: details.summary}}></p>
-          </div>
-        )}
+  // Find all the periods in the instructions with no spces and replace them with a period and a new line
+  const instructions = details.instructions ? details.instructions.replace(/\.(?=[^\s])/g, '.</br>') : '';
 
-        {activeTab === 'ingredients' && (
+  return (
+    <div>
+      <Header>{details.title}</Header>
+      <Wrapper>
+        <LeftColumn>
+          <img src={details.image} alt={details.title} />
+        </LeftColumn>
+        <RightColumn>
+          <h4>Ingredients</h4>
           <ul>
-          {details.extendedIngredients && details.extendedIngredients.map((item) => (
-            <li key={item.id}>{item.original}</li>
-          ))}
-        </ul>
-        )}
+            {details.extendedIngredients && details.extendedIngredients.map((item) => (
+              <li key={item.id}>{item.original}</li>
+            ))}
+          </ul>
+        </RightColumn>
+      </Wrapper>
+      <Info>
+        <h5>Instructions</h5>
+        <Instructions dangerouslySetInnerHTML={{__html: instructions}}></Instructions>
+        <h5>Summary</h5>
+        <Summary dangerouslySetInnerHTML={{__html: details.summary}}></Summary>
       </Info>
-    </DetailWrapper>
+    </div>
   )
 }
 
-const DetailWrapper = styled.div`
-  margin-top: 10rem;
-  margin-bottom: 5rem;
-  display: flex;
+const Header = styled.h2`
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
 
-  .active {
-    background: linear-gradient(35deg, #494949, #313131);
-    color: white;
+    @media (max-width: 767px) {
+      font-size: 2rem;
+    }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const LeftColumn = styled.div`
+  width: 50%;
+
+  img {
+    width: 100%;
+    border-radius: 8px;
   }
 
-  h2 {
-    margin-bottom: 2rem;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
+const RightColumn = styled.div`
+  width: 50%;
+  padding-left: 1rem;
+
+  h4 {
+    font-size: 1.2rem;
   }
 
   ul {
-    margin-top: 2rem;
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
   }
 
-  li {
-    font-size: 1.2 rem;
-    line-height: 2.5rem;
+  @media (max-width: 767px) {
+    width: 100%;
+    padding-left: 0;
+    h4 {
+      margin-top: 2rem;
+    }
   }
-`
+`;
 
-const Button = styled.button`
-  padding: 1rem 2rem;
-  color: #313131;
-  background: #FFF;
-  border: 2px solid black;
-  font-weight: 600;
-`
 
 const Info = styled.div`
-  margin-left: 10rem;
+  margin-bottom: 2rem;
+  h5 {
+    font-size: 1.2rem;
+    margin: 2rem 0 1rem 0;
+  }
+`
+
+const Instructions = styled.p`
+  margin-bottom: 2rem;
+`
+
+const Summary = styled.p`
+  font-size: 0.8rem;
 `
 
 export default Recipe
