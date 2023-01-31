@@ -31,8 +31,6 @@ function Carousel({ carouselTitle, carouselData}) {
         navigation={false}
         pagination={{ clickable: true }}
         scrollbar={false}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
       >
         {carouselData.map((item) => {
         return (

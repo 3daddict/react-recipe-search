@@ -44,6 +44,7 @@ const SLink = styled(NavLink)`
   width: 5rem;
   height: 5rem;
   cursor: pointer;
+  text-decoration: none;
 
   h4 {
     color: #FFF;
