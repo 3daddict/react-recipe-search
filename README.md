@@ -21,5 +21,5 @@ Visit `http://localhost:3000` in your browser to see the app in action.
 ## Built With
 - React - JavaScript library for building user interfaces
 - styled-components - A library for styling React components
-- Splide - A flexible, lightweight and accessible slider written in TypeScript
+- SwiperJS - The Most Modern Mobile Touch Slider
 - Spoonacular API - A Food API and Recipe API
