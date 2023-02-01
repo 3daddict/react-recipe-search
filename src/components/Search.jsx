@@ -3,24 +3,31 @@ import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-function Search() {
+const Search = ({ setInputValue }) => {
   const [input, setInput] = useState('');
   const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setInputValue(input);
     navigate(`/searched/${input}`);
+    setInput('');
   };
 
   return (
     <FormStyle onSubmit={submitHandler}>
       <InputWrapper>
-        <input onChange={(e) => setInput(e.target.value) } type="text" placeholder="Search for a recipe" value={input} />
+        <input
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          placeholder="Search for a recipe"
+          value={input}
+        />
         <FaSearch />
       </InputWrapper>
     </FormStyle>
-  )
-}
+  );
+};
 
 const FormStyle = styled.form`
   display: flex;
