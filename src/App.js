@@ -1,12 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter, Link } from "react-router-dom";
 import Pages from "./pages/Pages";
 import Search from "./components/Search";
 import Category from "./components/Category";
+import SearchHistory from "./components/SearchHistory";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { MdOutlineFoodBank } from "react-icons/md";
 
 function App() {
+  const [input, setInputValue] = useState([]);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -23,8 +26,9 @@ function App() {
                 recipe for you! Just type in a keyword and let the magic happen.
               </span>
             </Description>
-            <Search />
+            <Search setInputValue={setInputValue} />
             <Category />
+            <SearchHistory input={input} />
           </LeftColumn>
           <RightColumn>
             <Pages />
